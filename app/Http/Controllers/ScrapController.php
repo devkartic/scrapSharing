@@ -29,11 +29,12 @@ class ScrapController extends Controller
 
         foreach ($links as $key => $lin){
             $detailHtml = file_get_contents($lin);
-            $array['link'] = $lin;
-            $array['post'] = $this->findStringByTagAttributes($detailHtml, 'h1');
-            $array['detail'] = $this->findStringByTagAttributes($detailHtml, 'div[itemprop="articleBody"]');
+            $array['link'] = $this->filterData($lin);
+            $array['title'] = $this->findStringByTagAttributes($detailHtml, 'h1');
+            $array['post'] = $this->findStringByTagAttributes($detailHtml, 'div[itemprop="articleBody"]');
             $data[] = $array;
-            if($key==3) break;
+
+            if($key==10) break;
         }
         return $data;
     }
@@ -46,6 +47,12 @@ class ScrapController extends Controller
         $html->load($detailHtml);
         $data = $html->find($string)[0]->plaintext;
 
+        return $this->filterData($data);
+    }
+
+    public function filterData($data){
+        $data = htmlspecialchars($data);
+        $data = strip_tags(html_entity_decode($data));
         return $data;
     }
 }
