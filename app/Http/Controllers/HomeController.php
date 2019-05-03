@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Post;
 use Illuminate\Http\Request;
 use App\Http\Controllers\ScrapController;
 
@@ -24,10 +25,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $obj = new ScrapController();
+//        $obj = new ScrapController();
+//        $this->pr($obj->getContent());
 
-        $this->pr($obj->getContent());
+        $posts = Post::all();
 
-        return view('home');
+        return view('home', compact('posts'));
     }
 }
