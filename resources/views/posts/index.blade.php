@@ -26,10 +26,9 @@
                         <tr class="odd gradeX">
                             <td>{{ ++$key }}</td>
                             <td>{{ $post->title }}</td>
-                            <td>{{ $post->detatil }}</td>
+                            <td>{{ substr($post->post, 0, 100) }} <a href="#">more...</a></td>
                             <td class="center">
-                                <button> Facebook </button>
-                                <button> Twitter </button>
+                                <a href="{{ url('posts/'.$post->id) }}" class="btn btn-primary btn-sm"> Show </a>
                             </td>
                         </tr>
                         @endforeach

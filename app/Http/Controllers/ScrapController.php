@@ -34,7 +34,7 @@ class ScrapController extends Controller
             $array['post'] = $this->findStringByTagAttributes($detailHtml, 'div[itemprop="articleBody"]');
             $data[] = $array;
 
-            if($key==5) break;
+            if($key==10) break;
         }
         return $data;
     }
